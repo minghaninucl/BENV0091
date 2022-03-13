@@ -1,16 +1,7 @@
 ---
 title: "Tidymodels"
-output:
-  html_document:
-    df_print: paged
-editor_options:
-  chunk_output_type: console
+output: html_document
 ---
-
-```{r include=FALSE}
-knitr::opts_chunk$set(message = FALSE)
-```
-
 
 ### Imports
 
@@ -23,7 +14,7 @@ library(lubridate)
 First we will read the data and arrange it by time. Arranging the data by time allows us to easily split the data into temporally continuous train and test sets, avoiding data leakage. In addition, we will use just 10% of the data: this is purely to speed up the computational cost of fitting models, feel free to decrease or increase this as you like. We will also add some time variables (these are not currently implemented in the `recipes` package).
 
 ```{r}
-df <- read_csv('data/vw_train.csv') %>% 
+df <- read_csv('vw_train.csv') %>% 
   sample_frac(0.1, replace = FALSE) %>% # choose 10% of the data 
   arrange(timestamp) %>% # sort data by timestamp 
   mutate(week = week(timestamp)) %>% # add a week number column
